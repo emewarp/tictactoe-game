@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
 .game-board
 {
 	width: 40rem;
-	margin: 0 auto;
+  margin: 0 auto;
+  margin-top: 2.5%;
   background-color: #87dce2;
   border: 25px solid #87dce2;
   border-radius: 35px;
@@ -21,4 +25,58 @@
 .gameBox:focus, .gameBox:active {
   outline: none;
   border: thin solid #ddd;
+}
+
+.play-again
+{
+  width: 30rem;
+  height: 30rem;
+  margin: 0 auto;
+  margin-top: 10%;
+  border: 25px solid #87dce2;
+  border-radius: 35px;
+  background: yellow;
+}
+
+.play-again-message
+{
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  top: 35%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  letter-spacing: 0.08em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: white;
+  text-shadow: 
+						8px 8px #ff1f8f,
+            15px 15px #000000;            
+    
+}
+
+.play-again-button
+{  
+  height: 4rem;
+  width: 10rem;
+  position: relative;
+  margin-top: 160px;
+  margin-left: 250px;
+  background: #87dce2;
+  border-radius: 15px;
+  border-color: #87dce2;  
+  background-color: #87dce2;
+  font-family: 'Montserrat', sans-serif;
+  font-size: larger;
+  text-align: center;
+  /*line-height: 4rem; =height to center the text*/
+}
+
+.tic-tac-toe
+{
+  font-family: 'Indie Flower', sans-serif;
+  font-size: 4.5rem;
+  margin-top: 4.5%;
+  margin-left: 36%;
 }

@@ -100,7 +100,6 @@ const TicTacToeGame = () => {
           if(sumH === 3 || sumH === 6){
             console.log('sumH', sumH);
             setGameDone(true);
-            return sumH;
           }
         }  
         //vertical
@@ -126,7 +125,7 @@ const TicTacToeGame = () => {
     playGameBox(player, gameBoxKey);
     let game = isGame(player, gameBoxKey);
     let winner = getWinner(game);    
-    console.log('winner:', winner);
+    //console.log('winner:', winner);
     console.log(isGameDone);
 };
 
@@ -141,42 +140,47 @@ return (
  <div className="game">
      {isGameDone === true ?
         (
-            <PlayAgain onPlayAgain={playAgain}/>
+            <PlayAgain onPlayAgain={playAgain} winner={currentPlayer}/>
         ) :
         (
-            <table className="game-board">
-                <tr>
-                    <td> {utils.range(0, 2).map(key => (
-                        <PlayerButton 
-                                key={key}
-                                gameBoxKey={key}
-                                gameBoxState={gameBoxStatus(key)}
-                                onClick={clickGameBox} player={currentPlayer}
-                        />
-                    ))} </td>
-                
-                </tr>
-                <tr>
-                    <td> {utils.range(0, 2).map(key => (
-                        <PlayerButton 
-                                key={key+3}
-                                gameBoxKey={10+key}
-                                gameBoxState={gameBoxStatus(10+key)}
-                                onClick={clickGameBox} player={currentPlayer}
-                        />
-                    ))} </td>
-                </tr>
-                <tr>
-                    <td> {utils.range(0, 2).map(key => (
-                        <PlayerButton 
-                                key={key+6}
-                                gameBoxKey={20+key}
-                                gameBoxState={gameBoxStatus(20+key)}
-                                onClick={clickGameBox} player={currentPlayer}
-                        />
-                    ))} </td>
-                </tr>          
+            <div>
+                <div className='tic-tac-toe'>
+                TIC TAC TOE 
+            </div>
+                <table className="game-board">
+                    <tr>
+                        <td> {utils.range(0, 2).map(key => (
+                            <PlayerButton 
+                                    key={key}
+                                    gameBoxKey={key}
+                                    gameBoxState={gameBoxStatus(key)}
+                                    onClick={clickGameBox} player={currentPlayer}
+                            />
+                        ))} </td>
+                    
+                    </tr>
+                    <tr>
+                        <td> {utils.range(0, 2).map(key => (
+                            <PlayerButton 
+                                    key={key+3}
+                                    gameBoxKey={10+key}
+                                    gameBoxState={gameBoxStatus(10+key)}
+                                    onClick={clickGameBox} player={currentPlayer}
+                            />
+                        ))} </td>
+                    </tr>
+                    <tr>
+                        <td> {utils.range(0, 2).map(key => (
+                            <PlayerButton 
+                                    key={key+6}
+                                    gameBoxKey={20+key}
+                                    gameBoxState={gameBoxStatus(20+key)}
+                                    onClick={clickGameBox} player={currentPlayer}
+                            />
+                        ))} </td>
+                    </tr>          
                 </table>
+            </div>            
         )
      }
    
