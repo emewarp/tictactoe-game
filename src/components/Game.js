@@ -1,16 +1,18 @@
 import React from 'react';
 import utils from '../crosscutting/math-utils';
 import PlayerButton from '../components/PlayerButton';
+import PlayAgain from './PlayAgain';
 
 
 const TicTacToeGame = () => {
   console.log('init');
 
   //hooks
+  const [isGameDone, setGameDone] = React.useState(false);
   const [currentPlayer, setCurrentPlayer] = React.useState('playerO');
   const [gameMatrix] = React.useState(Array(9).fill(0)) // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
 
-  //change state logic  
+  // logic
 
   // 1. game box state
   const getMatrixIndexes = (key) => {
@@ -97,6 +99,7 @@ const TicTacToeGame = () => {
           console.log('sH', sumH);
           if(sumH === 3 || sumH === 6){
             console.log('sumH', sumH);
+            setGameDone(true);
             return sumH;
           }
         }  
@@ -109,10 +112,12 @@ const TicTacToeGame = () => {
 
   const getWinner = (sum) => {
     switch(sum){
-      case 3:
-        return 'playerO'; //1+1+1
-      case 6:
-        return 'playerX'; //2+2+2
+        case 3:
+            return 'playerO'; //1+1+1
+        case 6:
+            return 'playerX'; //2+2+2
+        default:
+            break;
     }
   }
 
@@ -120,46 +125,61 @@ const TicTacToeGame = () => {
     console.log('click');
     playGameBox(player, gameBoxKey);
     let game = isGame(player, gameBoxKey);
-    let winner = getWinner(game);
+    let winner = getWinner(game);    
     console.log('winner:', winner);
+    console.log(isGameDone);
 };
 
+// 4. play again
+const playAgain = () =>{
+    console.log('playAgain');
+}
+
+// UI
 return (
 
- <div className="game-board">
-   <table>
-        <tr>
-         <td> {utils.range(0, 2).map(key => (
-               <PlayerButton 
-                      key={key}
-                      gameBoxKey={key}
-                      gameBoxState={gameBoxStatus(key)}
-                      onClick={clickGameBox} player={currentPlayer}
-               />
-             ))} </td>
-        
-       </tr>
-       <tr>
-          <td> {utils.range(0, 2).map(key => (
-               <PlayerButton 
-                      key={key+3}
-                      gameBoxKey={10+key}
-                      gameBoxState={gameBoxStatus(10+key)}
-                      onClick={clickGameBox} player={currentPlayer}
-               />
-             ))} </td>
-       </tr>
-       <tr>
-          <td> {utils.range(0, 2).map(key => (
-               <PlayerButton 
-                      key={key+6}
-                      gameBoxKey={20+key}
-                      gameBoxState={gameBoxStatus(20+key)}
-                      onClick={clickGameBox} player={currentPlayer}
-               />
-             ))} </td>
-       </tr>          
-     </table>
+ <div className="game">
+     {isGameDone === true ?
+        (
+            <PlayAgain onPlayAgain={playAgain}/>
+        ) :
+        (
+            <table className="game-board">
+                <tr>
+                    <td> {utils.range(0, 2).map(key => (
+                        <PlayerButton 
+                                key={key}
+                                gameBoxKey={key}
+                                gameBoxState={gameBoxStatus(key)}
+                                onClick={clickGameBox} player={currentPlayer}
+                        />
+                    ))} </td>
+                
+                </tr>
+                <tr>
+                    <td> {utils.range(0, 2).map(key => (
+                        <PlayerButton 
+                                key={key+3}
+                                gameBoxKey={10+key}
+                                gameBoxState={gameBoxStatus(10+key)}
+                                onClick={clickGameBox} player={currentPlayer}
+                        />
+                    ))} </td>
+                </tr>
+                <tr>
+                    <td> {utils.range(0, 2).map(key => (
+                        <PlayerButton 
+                                key={key+6}
+                                gameBoxKey={20+key}
+                                gameBoxState={gameBoxStatus(20+key)}
+                                onClick={clickGameBox} player={currentPlayer}
+                        />
+                    ))} </td>
+                </tr>          
+                </table>
+        )
+     }
+   
  </div>
 );
 };
