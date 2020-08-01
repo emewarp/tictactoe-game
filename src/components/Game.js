@@ -10,9 +10,11 @@ const TicTacToeGame = () => {
   //hooks
   const [isGameDone, setGameDone] = React.useState(false);
   const [currentPlayer, setCurrentPlayer] = React.useState('playerO');
-  const [gameMatrix] = React.useState(Array(9).fill(0)) // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
+  const [gameMatrix, setGameMatrix] = React.useState(Array(9).fill(0)) // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
 
   // logic
+
+
 
   // 1. game box state
   const getMatrixIndexes = (key) => {
@@ -44,7 +46,8 @@ const TicTacToeGame = () => {
     } 
   };
 
-  // 2. play box (update game matrix to 1-playerO or 2-playerX, default/notplayed = 0)
+
+  // 2. play game box (update game matrix to 1-playerO or 2-playerX, default/notplayed = 0)
   const changePlayer = (player) => {
   switch(player){
       case 'playerO':
@@ -131,7 +134,9 @@ const TicTacToeGame = () => {
 
 // 4. play again
 const playAgain = () =>{
-    console.log('playAgain');
+    setGameMatrix(Array(9).fill(0));
+    setCurrentPlayer('playerO');
+    setGameDone(false);
 }
 
 // UI
