@@ -1,4 +1,4 @@
-const utils = {
+const maths = {
     // Sum an array
     sum: arr => arr.reduce((acc, curr) => acc + curr, 0),
     
@@ -6,4 +6,4 @@ const utils = {
     range: (min, max) => Array.from({length: max - min + 1}, (_, i) => min + i),
 };
 
-export default utils;
+export default maths;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlayAgain = props => (
+const PlayAgainMenu = props => (
     <div className="play-again">
         <div className="play-again-message">
             {props.winner} wins !
@@ -12,4 +12,4 @@ const PlayAgain = props => (
 
 );
 
-export default PlayAgain;
+export default PlayAgainMenu;
