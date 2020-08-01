@@ -1,10 +1,21 @@
+.game-board
+{
+	width: 36rem;
+	margin: 0 auto;
+  background-color: #87dce2;
+  border: 25px solid #87dce2;
+  border-radius: 35px;
+
+}
+
 .gameBox {
-  background-color: #eee;
-  border: thin solid #ddd;
-  width: 45px;
-  height: 45px;
-  margin: 10px;
-  font-size: 25px;
+  border: 6px solid #fcfcfc;
+  border-radius: 35px;
+  width: 10rem;
+  height: 10rem;
+  margin: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 .gameBox:focus, .gameBox:active {

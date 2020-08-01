@@ -125,9 +125,8 @@ const TicTacToeGame = () => {
 
 return (
 
- <div className="game">
-   <div className="body">
-     <table>
+ <div className="game-board">
+   <table>
         <tr>
          <td> {utils.range(0, 2).map(key => (
                <PlayerButton 
@@ -160,7 +159,6 @@ return (
              ))} </td>
        </tr>          
      </table>
-     </div>
  </div>
 );
 };

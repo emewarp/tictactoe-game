@@ -1,7 +1,7 @@
 const colors = {
-    empty: 'lightgray',
-    playerO: 'lightgreen',
-    playerX: 'lightcoral',
+    empty: 'white',
+    playerO: 'yellow',
+    playerX: 'lightpink',
 };
 
 export default colors;
