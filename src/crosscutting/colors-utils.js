@@ -1,6 +1,6 @@
 const colors = {
     empty: 'white',
-    playerO: 'yellow',
+    playerO: 'rgb(252, 209, 22)',
     playerX: 'lightpink',
 };
 
