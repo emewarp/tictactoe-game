@@ -8,10 +8,8 @@ const TicTacToeGame = () => {
 
   //hooks
   const [isGameDone, setGameDone] = React.useState(false);
-  const [player, setPlayer] = React.useState("playerO");
+  const [player, setPlayer] = React.useState('playerO');
   const [gameMatrix, setGameMatrix] = React.useState(Array(9).fill(0)); // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
-
-  let gameCount = 0; 
 
   // logic
   // 1. game box state
@@ -33,13 +31,22 @@ const TicTacToeGame = () => {
 
     switch (matrixValue) {
       case 0:
-        return "empty";
+        return {
+            status: 'empty',
+            gamePiece: ''
+        }
       case 1:
-        return "playerO";
+        return {
+            status: 'playerO',
+            gamePiece: 'O'
+        }
       case 2:
-        return "playerX";
+        return {
+            status: 'playerX',
+            gamePiece: 'X'
+        }
       default:
-        return "empty";
+        break;
     }
   };
 
@@ -79,24 +86,40 @@ const TicTacToeGame = () => {
 
   // 3. check if game (winner: makes a line in the board)
 
+  const isWinnerInLine = (sum, sumArray) => {
+    if((sum===3 || sum===6) && !sumArray.includes(0)){
+        setPlayer(getWinner(sum));
+        return true;
+    }   
+  }
   const isGame = (player, id) => {
-    console.log("empezando a sumar");
+    
+    let sumArrayMainD = Array(3).fill(0);
+    let sumArraySecondD = Array(3).fill(0);
+
     for(let i=0; i<=2; i++){
-        console.log('i', i);
-        let sumArray = new Array(3).fill(0);
+
+        sumArrayMainD[i] = gameMatrix[3*i+i];
+        sumArraySecondD[i] = gameMatrix[3*i+(3-i-1)];
+
+        let sumArrayH = new Array(3).fill(0);
+        let sumArrayV = new Array(3).fill(0);        
         for(let j=0; j<=2; j++){
             let n = 3*i+j;
-            sumArray[j] = gameMatrix[n];
+            let m = 3*j+i
+            sumArrayH[j] = gameMatrix[n];
+            sumArrayV[j] = gameMatrix[m];
         }
-        console.log('sumArray', sumArray);
-        let sumH = maths.sum(sumArray);
-        console.log(sumH);
-        if((sumH===3 || sumH===6) && !sumArray.includes(0)){
-            console.log('wineeeer!!!', sumH);
-            setPlayer(getWinner(sumH));
+
+        let sumH = maths.sum(sumArrayH);
+        let sumV = maths.sum(sumArrayV);
+        let sumMainD = maths.sum(sumArrayMainD);
+        let sumSecondD = maths.sum(sumArraySecondD);
+
+        if(isWinnerInLine(sumH,sumArrayH) || isWinnerInLine(sumV, sumArrayV) || isWinnerInLine(sumMainD, sumArrayMainD) || isWinnerInLine(sumSecondD, sumArraySecondD)){
             setGameDone(true);
             return true;
-        }
+        }   
     }
 
   
