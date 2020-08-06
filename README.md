@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Web application that represents a typical Tic-tac-toe game.
 
-## Initialitation
+## Initialization
 
 run `npm start`
 
