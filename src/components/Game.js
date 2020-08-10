@@ -1,5 +1,6 @@
 import React from "react";
 import PlayAgainMenu from "./PlayAgainMenu";
+import StartMenu from './StartMenu';
 import PlayGame from "./PlayGame";
 import maths from '../crosscutting/math-utils';
 
@@ -8,6 +9,7 @@ const TicTacToeGame = () => {
 
   //hooks
   const [isGameDone, setGameDone] = React.useState(false);
+  const [isGameStarted, setGameStarted] = React.useState(false);
   const [player, setPlayer] = React.useState('playerO');
   const [gameMatrix, setGameMatrix] = React.useState(Array(9).fill(0)); // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
 
@@ -51,6 +53,7 @@ const TicTacToeGame = () => {
   };
 
   // 2. play game box (update game matrix to 1-playerO or 2-playerX, default/notplayed = 0)
+  //toogle
   const changePlayer = (player) => {
     switch (player) {
       case "playerO":
@@ -145,20 +148,25 @@ const TicTacToeGame = () => {
   // 4. play again
   const restartGame = () => {
     setGameMatrix(Array(9).fill(0));
+    setGameStarted(true);
     setGameDone(false);
   };
 
   // UI
   return (
     <div className="game">
-      {isGameDone === true ? (
-        <PlayAgainMenu onPlayAgain={restartGame} winner={player} />
+      {isGameStarted === true ? (
+        isGameDone === true ? (
+          <PlayAgainMenu onPlayAgain={restartGame} winner={player} />
+        ) : (
+          <PlayGame
+            clickGameBox={clickGameBox}
+            currentPlayer={player}
+            gameBoxStatus={gameBoxStatus}
+          />
+        )
       ) : (
-        <PlayGame
-          clickGameBox={clickGameBox}
-          currentPlayer={player}
-          gameBoxStatus={gameBoxStatus}
-        />
+        <StartMenu onPlayGame={restartGame}/>
       )}
     </div>
   );
