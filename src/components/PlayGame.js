@@ -5,9 +5,6 @@ import PlayerButton from '../components/PlayerButton';
 const PlayGame = props => (
 
     <div>
-        <div className='tic-tac-toe'>
-                TIC TAC TOE 
-        </div>
         <table className="game-board">
             <tr>
                 <td> {maths.range(0, 2).map(key => (
