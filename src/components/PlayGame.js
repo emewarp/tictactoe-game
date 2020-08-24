@@ -11,7 +11,7 @@ const PlayGame = props => {
     const clickGameBox = (player, gameBoxKey) => {
         console.log("click");
         playGameBox(player, gameBoxKey);
-        if(isGame(player, gameBoxKey)){
+        if(isGame()){
             props.onEndGame();
         }
     };
@@ -35,42 +35,75 @@ const PlayGame = props => {
         }
     };
 
-    const isGame = (player, id) => {
+    const isGame = () => {
+        if (isGameInColumns() || isGameInRows() || isGameInDiagonals())
+            return true;            
+    };
+
+    const isGameInRows = () => {
         let game = false;
-        let sumArrayMainD = Array(3).fill(0);
-        let sumArraySecondD = Array(3).fill(0);
+        for(let i=0; i<=2; i++){  
+            let sum = 0;
+            for(let j=0; j<=2; j++){
+
+                let value = gameMatrix[3*i+j];
+                if(value===0)
+                    break;
+                else
+                    sum += value;
+
+                if(j===2 && (sum===3 || sum===6))
+                    game=true;
+                    
+            }            
+        } 
+        return game;
+    };
+
+    const isGameInColumns = () => {
+        let game = false;
+        for(let i=0; i<=2; i++){  
+            let sum = 0;
+            for(let j=0; j<=2; j++){
+
+                let value = gameMatrix[3*j+i];
+                if(value===0)
+                    break; 
+                else
+                    sum += value;
+
+                if( j===2 && (sum===3 || sum===6))
+                    game=true;
+            }
+            
+        } 
+        return game;
+    };
+
+    const isGameInDiagonals = () => {
+        let game = false
+
+        let sumArrayMainDiagonal = Array(3).fill(0);
+        let sumArraySecondDiagonal = Array(3).fill(0);
     
         for(let i=0; i<=2; i++){
     
-            sumArrayMainD[i] = gameMatrix[3*i+i];
-            sumArraySecondD[i] = gameMatrix[3*i+(3-i-1)];
-    
-            let sumArrayH = new Array(3).fill(0);
-            let sumArrayV = new Array(3).fill(0);        
-            for(let j=0; j<=2; j++){
-                let n = 3*i+j;
-                let m = 3*j+i
-                sumArrayH[j] = gameMatrix[n];
-                sumArrayV[j] = gameMatrix[m];
-            }
-    
-            let sumH = maths.sum(sumArrayH);
-            let sumV = maths.sum(sumArrayV);
-            let sumMainD = maths.sum(sumArrayMainD);
-            let sumSecondD = maths.sum(sumArraySecondD);
-    
-            if(isWinnerInLine(sumH,sumArrayH) || isWinnerInLine(sumV, sumArrayV) || isWinnerInLine(sumMainD, sumArrayMainD) || isWinnerInLine(sumSecondD, sumArraySecondD)){
-                game = true;
-            }   
-        } 
-        return game;
-      };
+            sumArrayMainDiagonal[i] = gameMatrix[3*i+i];
+            sumArraySecondDiagonal[i] = gameMatrix[3*i+(3-i-1)];
 
-    const isWinnerInLine = (sum, sumArray) => {
-        if((sum===3 || sum===6) && !sumArray.includes(0)){
-            return true;
-        }   
-    }         
+            let sumMainDiagonal = maths.sum(sumArrayMainDiagonal);
+            let sumSecondDiagonal = maths.sum(sumArraySecondDiagonal);
+            if(((sumMainDiagonal===3 || sumMainDiagonal===6) && !sumArrayMainDiagonal.includes(0)) || (sumSecondDiagonal===3 || sumSecondDiagonal===6) && !sumArraySecondDiagonal.includes(0))
+                game=true;
+        } 
+        
+        
+            
+        return game;
+    };
+
+
+          
 
     return(
         <div>
