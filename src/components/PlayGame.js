@@ -108,37 +108,38 @@ const PlayGame = props => {
     return(
         <div>
             <table className="game-board">
-                <tr>
-                    <td> {maths.range(0, 2).map(key => (
-                        <PlayerButton 
-                            key={key}
-                            gameBoxKey={key}
-                            matrixValue={gameMatrix[maths.getArrayIndex((key))]}
-                            onClick={clickGameBox} player={props.currentPlayer}
-                        />
-                ))} </td>
-                        
-                </tr>
-                <tr>
-                    <td> {maths.range(0, 2).map(key => (
-                        <PlayerButton 
-                            key={key+3}
-                            gameBoxKey={10+key}
-                            matrixValue={gameMatrix[maths.getArrayIndex((10+key))]}
-                            onClick={clickGameBox} player={props.currentPlayer}
-                                />
-                    ))} </td>
-                </tr>
-                <tr>
-                    <td> {maths.range(0, 2).map(key => (
-                        <PlayerButton 
-                            key={key+6}
-                            gameBoxKey={20+key}
-                            matrixValue={gameMatrix[maths.getArrayIndex((20+key))]}
-                            onClick={clickGameBox} player={props.currentPlayer}
-                        />
-                    ))} </td>
-                </tr>          
+                <tbody>
+                    <tr>
+                        <td> {maths.range(0, 2).map(key => (
+                            <PlayerButton 
+                                key={key}
+                                gameBoxKey={key}
+                                matrixValue={gameMatrix[maths.getArrayIndex((key))]}
+                                onClick={clickGameBox} player={props.currentPlayer}
+                            />
+                    ))} </td>     
+                    </tr>
+                    <tr>
+                        <td> {maths.range(0, 2).map(key => (
+                            <PlayerButton 
+                                key={key+3}
+                                gameBoxKey={10+key}
+                                matrixValue={gameMatrix[maths.getArrayIndex((10+key))]}
+                                onClick={clickGameBox} player={props.currentPlayer}
+                                    />
+                        ))} </td>
+                    </tr>
+                    <tr>
+                        <td> {maths.range(0, 2).map(key => (
+                            <PlayerButton 
+                                key={key+6}
+                                gameBoxKey={20+key}
+                                matrixValue={gameMatrix[maths.getArrayIndex((20+key))]}
+                                onClick={clickGameBox} player={props.currentPlayer}
+                            />
+                        ))} </td>
+                    </tr>          
+                </tbody>
             </table>
         </div>            
     );
