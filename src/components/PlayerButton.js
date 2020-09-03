@@ -23,8 +23,20 @@ const gameBoxStatus = (value) => {
   }
 };
 
+const gameBoxId = (key) => {
+  let id = undefined;
+  if(key.toString().length < 2){
+    id = '0'.concat(key.toString());
+  }
+  else{
+    id = key.toString();
+  }
+  return id;
+};
+
 const PlayerButton = props => (
     <button className="gameBox"
+      id={gameBoxId(props.gameBoxKey)}
       style={{backgroundColor: colors[gameBoxStatus(props.matrixValue).status]}}
       onClick={()=> props.onClick(props.player, props.gameBoxKey)}
     >

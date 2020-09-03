@@ -2,6 +2,7 @@ import React from "react";
 import PlayAgainMenu from "./PlayAgainMenu";
 import StartMenu from './StartMenu';
 import PlayGame from "./PlayGame";
+import PlayGameSolo from "./PlayGameSolo";
 
 const TicTacToeGame = () => {
   console.log("init");
@@ -42,6 +43,7 @@ const TicTacToeGame = () => {
 
   const playGame = () => {
     startGame();
+    setGameSolo(false);
 
   }
 
@@ -58,12 +60,11 @@ const TicTacToeGame = () => {
           <PlayAgainMenu onPlayAgain={restartGame} winner={player} />
         ) : (
          isGameSolo === true ? (
-          <PlayGame
+          <PlayGameSolo 
             onEndGame={endGame}
             currentPlayer={player}
             onChangePlayer={changePlayer}            
           />
-
          ) : (
           <PlayGame
             onEndGame={endGame}
