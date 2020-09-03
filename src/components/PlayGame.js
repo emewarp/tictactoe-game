@@ -5,7 +5,7 @@ import PlayerButton from '../components/PlayerButton';
 const PlayGame = props => {
 
     //hooks
-    const [gameMatrix, setGameMatrix] = React.useState(Array(9).fill(0)); // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
+    const [gameMatrix] = React.useState(Array(9).fill(0)); // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
 
     //logic
     const clickGameBox = (player, gameBoxKey) => {

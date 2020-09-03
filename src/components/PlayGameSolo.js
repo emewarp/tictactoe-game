@@ -59,9 +59,6 @@ const PlayGameSolo = props => {
     const getRandomKey =  () => {
         return Math.floor(Math.random() * (3)).toString().concat(Math.floor(Math.random() * (3)).toString());
     };
-    const randomIndex =  () => {
-        return Math.floor(Math.random() * (9));
-    };
 
     const gameBoxValueInMatrix = (player) => {
         switch (player) {
