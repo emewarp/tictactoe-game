@@ -11,9 +11,9 @@ const PlayGame = props => {
     const clickGameBox = (player, gameBoxKey) => {
         console.log("click");
         playGameBox(player, gameBoxKey);
-        if(isGame()){
+        setTimeout(() => { if(isGame()){
             props.onEndGame();
-        }
+        }; }, 1500);
     };
 
     const playGameBox = (player, key) => {

@@ -6,8 +6,9 @@ const PlayGameSolo = props => {
 
     //hooks
     const [gameMatrix] = React.useState(Array(9).fill(0)); // the board game is a 3x3 matrix, which is also the concatenation of 3 arrays of lenght 3
-    //const [isMachinePlaying, setIsMachinePlaying] = React.useState(false);
     let isMachinePlaying = false;
+    let game = false;
+
 
     //logic
     const clickGameBox = (player, gameBoxKey) => {
@@ -15,26 +16,36 @@ const PlayGameSolo = props => {
 
         playGameBox(player, gameBoxKey);
 
-        if(isMachinePlaying){
-            machineSimulatesClickGameBox();
-        }
-        else{
-            return;
+        if(isGame()){
+            game = true;
+        }else{
+            if(isMachinePlaying){
+                machineSimulatesClickGameBox();
+            }
+            else{
+                return;
+            }
         }
 
-        if(isGame()){
-            props.onEndGame();
-        }
+        setTimeout(() => { 
+            if(game === true){
+                props.onEndGame();
+            }; 
+        }, 1500);
     };
 
     const playGameBox = (player, key) => {
         console.log('machinePlayingA', isMachinePlaying)
         let arrayIndex = maths.getArrayIndex(key);
         if (gameMatrix[arrayIndex] === 0) {
-            gameMatrix[arrayIndex] = gameBoxValueInMatrix(player);
-            props.onChangePlayer(player); 
-            isMachinePlaying = !isMachinePlaying; //setIsMachinePlaying(!isMachinePlaying); // won't change until the clickGameBox is finished :(
-            console.log('machinePlayingB', isMachinePlaying)
+            if(isMachinePlaying){
+                gameMatrix[arrayIndex] = 1;
+            }
+            else{
+                gameMatrix[arrayIndex] = 2;
+            }
+            props.onChangePlayer(player);
+            isMachinePlaying = !isMachinePlaying; //setIsMachinePlaying(!isMachinePlaying); // won't change until the clickGameBox is finished because it's a hook and it's related to the state
         }
        
         console.log("gameMatrix:", gameMatrix);
@@ -51,14 +62,12 @@ const PlayGameSolo = props => {
                 randomKey = getRandomKey();
             }
         }
-       
-            console.log(randomKey);
-            console.log(document.getElementById(randomKey.toString()));
-        document.getElementById(randomKey.toString()).click();            
+       document.getElementById(randomKey.toString()).click();            
     }
     const getRandomKey =  () => {
         return Math.floor(Math.random() * (3)).toString().concat(Math.floor(Math.random() * (3)).toString());
     };
+      
 
     const gameBoxValueInMatrix = (player) => {
         switch (player) {
@@ -148,6 +157,7 @@ const PlayGameSolo = props => {
                                 <PlayerButton 
                                     key={key}
                                     gameBoxKey={key}
+                                    isMachine={isMachinePlaying}
                                     matrixValue={gameMatrix[maths.getArrayIndex((key))]}
                                     onClick={clickGameBox} player={props.currentPlayer}
                                 />
@@ -159,6 +169,7 @@ const PlayGameSolo = props => {
                                 <PlayerButton 
                                     key={key+3}
                                     gameBoxKey={10+key}
+                                    isMachine={isMachinePlaying}
                                     matrixValue={gameMatrix[maths.getArrayIndex((10+key))]}
                                     onClick={clickGameBox} player={props.currentPlayer}
                                 />
@@ -169,6 +180,7 @@ const PlayGameSolo = props => {
                                 <PlayerButton 
                                     key={key+6}
                                     gameBoxKey={20+key}
+                                    isMachine={isMachinePlaying}
                                     matrixValue={gameMatrix[maths.getArrayIndex((20+key))]}
                                     onClick={clickGameBox} player={props.currentPlayer}
                                 />
