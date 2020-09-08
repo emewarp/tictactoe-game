@@ -1,5 +1,6 @@
 import React from 'react';
 import maths from '../crosscutting/math-utils';
+import isGame from '../crosscutting/isGame-logic';
 import PlayerButton from '../components/PlayerButton';
 
 const PlayGame = props => {
@@ -11,7 +12,7 @@ const PlayGame = props => {
     const clickGameBox = (player, gameBoxKey) => {
         console.log("click");
         playGameBox(player, gameBoxKey);
-        setTimeout(() => { if(isGame()){
+        setTimeout(() => { if(isGame(gameMatrix)){
             props.onEndGame();
         }; }, 1500);
     };
@@ -35,75 +36,6 @@ const PlayGame = props => {
         }
     };
 
-    const isGame = () => {
-        if (isGameInColumns() || isGameInRows() || isGameInDiagonals())
-            return true;            
-    };
-
-    const isGameInRows = () => {
-        let game = false;
-        for(let i=0; i<=2; i++){  
-            let sum = 0;
-            for(let j=0; j<=2; j++){
-
-                let value = gameMatrix[3*i+j];
-                if(value===0)
-                    break;
-                else
-                    sum += value;
-
-                if(j===2 && (sum===3 || sum===6))
-                    game=true;
-                    
-            }            
-        } 
-        return game;
-    };
-
-    const isGameInColumns = () => {
-        let game = false;
-        for(let i=0; i<=2; i++){  
-            let sum = 0;
-            for(let j=0; j<=2; j++){
-
-                let value = gameMatrix[3*j+i];
-                if(value===0)
-                    break; 
-                else
-                    sum += value;
-
-                if( j===2 && (sum===3 || sum===6))
-                    game=true;
-            }
-            
-        } 
-        return game;
-    };
-
-    const isGameInDiagonals = () => {
-        let game = false
-
-        let sumArrayMainDiagonal = Array(3).fill(0);
-        let sumArraySecondDiagonal = Array(3).fill(0);
-    
-        for(let i=0; i<=2; i++){
-    
-            sumArrayMainDiagonal[i] = gameMatrix[3*i+i];
-            sumArraySecondDiagonal[i] = gameMatrix[3*i+(3-i-1)];
-
-            let sumMainDiagonal = maths.sum(sumArrayMainDiagonal);
-            let sumSecondDiagonal = maths.sum(sumArraySecondDiagonal);
-            if(((sumMainDiagonal===3 || sumMainDiagonal===6) && !sumArrayMainDiagonal.includes(0)) || (sumSecondDiagonal===3 || sumSecondDiagonal===6) && !sumArraySecondDiagonal.includes(0))
-                game=true;
-        } 
-        
-        
-            
-        return game;
-    };
-
-
-          
 
     return(
         <div>
@@ -126,7 +58,7 @@ const PlayGame = props => {
                                 gameBoxKey={10+key}
                                 matrixValue={gameMatrix[maths.getArrayIndex((10+key))]}
                                 onClick={clickGameBox} player={props.currentPlayer}
-                                    />
+                            />
                         ))} </td>
                     </tr>
                     <tr>
@@ -136,6 +68,7 @@ const PlayGame = props => {
                                 gameBoxKey={20+key}
                                 matrixValue={gameMatrix[maths.getArrayIndex((20+key))]}
                                 onClick={clickGameBox} player={props.currentPlayer}
+                                //onClick={ props.solo ? clickGameBoxSolo : clickGameBox} player={props.currentPlayer} //if rendering only PlayGame component, the diference comes on the clickGame function
                             />
                         ))} </td>
                     </tr>          
