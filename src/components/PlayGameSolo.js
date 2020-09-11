@@ -40,11 +40,11 @@ const PlayGameSolo = props => {
         if (gameMatrix[arrayIndex] === 0) {
             if(isMachinePlaying){
                 gameMatrix[arrayIndex] = 1;
-                props.onChangePlayer('playerO');
+                props.onChangePlayer("playerX");
             }
             else{
                 gameMatrix[arrayIndex] = 2;
-                props.onChangePlayer('playerO');
+                props.onChangePlayer("playerO");
             }
             props.onChangePlayer(player);
             isMachinePlaying = !isMachinePlaying; //setIsMachinePlaying(!isMachinePlaying); // won't change until the clickGameBox is finished because it's a hook and it's related to the state

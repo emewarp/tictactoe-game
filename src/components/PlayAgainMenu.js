@@ -9,7 +9,6 @@ const PlayAgainMenu = props => (
             Play Again
         </button>
    </div>
-
 );
 
 export default PlayAgainMenu;

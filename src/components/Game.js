@@ -5,8 +5,6 @@ import PlayGame from "./PlayGame";
 import PlayGameSolo from "./PlayGameSolo";
 
 const TicTacToeGame = () => {
-  console.log("init");
-
   //hooks
   const [player, setPlayer] = React.useState('playerO');
   const [isGameSolo, setGameSolo] = React.useState(false);
