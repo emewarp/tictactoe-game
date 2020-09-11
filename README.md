@@ -8,13 +8,13 @@ Web application that represents a typical Tic-tac-toe game.
 
 run `npm start`
 
-## v1 (current state)
+## v1 
 
 two players, same device
 
 option to restart game when one player wins
 
-## v2
+## v2 (current state)
 
 game mode 1: one player against machine
 
